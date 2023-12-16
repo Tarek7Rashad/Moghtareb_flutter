@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "567915614715",
+    "project_id": "moghtareb-46dc4",
+    "storage_bucket": "moghtareb-46dc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567915614715:android:a0a9a29163d94c59197b5e",
+        "android_client_info": {
+          "package_name": "com.example.moghtareb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHhjih2RmVlufz3Mj7fEE5OYihAPOnUjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
