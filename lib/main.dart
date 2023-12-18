@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moghtareb/firebase_options.dart';
+import 'package:moghtareb/screens/UnitDetails.dart';
 import 'package:moghtareb/screens/admin/AddUnit_Screen.dart';
 import 'package:moghtareb/screens/admin/AdminHome_Screen.dart';
 import 'package:moghtareb/screens/Home_Screen.dart';
@@ -43,6 +44,7 @@ class Moghtareb extends StatelessWidget {
           AddUnit.id: (context) => const AddUnit(),
           ControlUnit.id: (context) => const ControlUnit(),
           EditUnit.id: (context) => const EditUnit(),
+          UnitInfo.id: (context) => const UnitInfo(),
         },
         themeMode: ThemeMode.system,
       ),

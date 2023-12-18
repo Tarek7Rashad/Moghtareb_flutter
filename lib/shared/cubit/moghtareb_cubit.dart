@@ -62,7 +62,7 @@ class MoghtarebCubit extends Cubit<MoghtarebState> {
   Future<void> signUp() async {
     FirebaseAuth auth = FirebaseAuth.instance;
     UserCredential user = await auth.createUserWithEmailAndPassword(
-        email: registerEmail, password: registerPassword);
+        email: registerEmail.trim(), password: registerPassword.trim());
     log(user.user!.email.toString());
     emit(SignUpState());
     emit(SignInScreenState());

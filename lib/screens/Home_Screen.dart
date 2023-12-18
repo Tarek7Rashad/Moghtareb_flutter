@@ -6,6 +6,7 @@ import 'package:moghtareb/Service/fireStoreService/StoreUnit.dart';
 import 'package:moghtareb/model/Unit_Model.dart';
 import 'package:moghtareb/screens/Profile_Screen.dart';
 import 'package:moghtareb/screens/Start_Screen.dart';
+import 'package:moghtareb/screens/UnitDetails.dart';
 import 'package:moghtareb/shared/constant.dart';
 import 'package:moghtareb/shared/cubit/moghtareb_cubit.dart';
 import 'package:moghtareb/widget/CustomSearchBar.dart';
@@ -121,14 +122,14 @@ class HomeScreen extends StatelessWidget {
                   var unitData = doc.data() as Map<String, dynamic>;
                   units.add(
                     UnitModel(
-                        unitImages: unitData[kUnitImages] ??
-                            'assets/images/hand-holding-house.png',
-                        unitLocation: unitData[kUnitLocation],
-                        unitPrice: unitData[kUnitPrice],
-                        unitDescription: unitData[kUnitDescription],
-                        unitRooms: unitData[kUnitRooms],
-                        unitBeds: unitData[kUnitBeds],
-                       ),
+                      unitImages: unitData[kUnitImages] ??
+                          'assets/images/hand-holding-house.png',
+                      unitLocation: unitData[kUnitLocation],
+                      unitPrice: unitData[kUnitPrice],
+                      unitDescription: unitData[kUnitDescription],
+                      unitRooms: unitData[kUnitRooms],
+                      unitBeds: unitData[kUnitBeds],
+                    ),
                   );
                 }
 
@@ -141,117 +142,125 @@ class HomeScreen extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 32),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(boxShadow: [
-                          BoxShadow(
-                              blurRadius: 20,
-                              color: kgreyColor.withOpacity(.1),
-                              spreadRadius: 5,
-                              offset: const Offset(10, 10))
-                        ]),
-                        child: Card(
-                          elevation: 10,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 14, vertical: 10),
-                            child: Column(
-                              children: [
-                                Stack(children: [
-                                  Container(
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    child: units[index].unitImages.isNotEmpty
-                                        ? Image.asset(
-                                            units[index].unitImages,
-                                            height: 300,
-                                            width: 400,
-                                            fit: BoxFit.fill,
-                                          )
-                                        : Image.asset(
-                                            'assets/images/Moghtareb-removebg-preview.png',
-                                            height: 300,
-                                            width: 400,
-                                            fit: BoxFit.fill,
-                                          ),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(UnitInfo.id, arguments: units[index]);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(boxShadow: [
+                            BoxShadow(
+                                blurRadius: 20,
+                                color: kgreyColor.withOpacity(.1),
+                                spreadRadius: 5,
+                                offset: const Offset(10, 10))
+                          ]),
+                          child: Card(
+                            elevation: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 14, vertical: 10),
+                              child: Column(
+                                children: [
+                                  Stack(children: [
+                                    Container(
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(16)),
+                                      child: units[index].unitImages.isNotEmpty
+                                          ? Image.asset(
+                                              units[index].unitImages,
+                                              height: 300,
+                                              width: 400,
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/Moghtareb-removebg-preview.png',
+                                              height: 300,
+                                              width: 400,
+                                              fit: BoxFit.fill,
+                                            ),
+                                    ),
+                                  ]),
+                                  SizedBox(
+                                    height: height * .03,
                                   ),
-                                ]),
-                                SizedBox(
-                                  height: height * .03,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Location : ${units[index].unitLocation}",
-                                          style: const TextStyle(
-                                              fontSize: 20,
-                                              color: kblackColor,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: height * .01,
-                                        ),
-                                        Text(
-                                          "Rooms : ${units[index].unitRooms}   ",
-                                          style: const TextStyle(
-                                              fontSize: 20,
-                                              color: kblackColor,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: width * .05,
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Beds : ${units[index].unitBeds}  ",
-                                          style: const TextStyle(
-                                              fontSize: 20,
-                                              color: kblackColor,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: height * .01,
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              "Price : ",
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: kblackColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              "${units[index].unitPrice}",
-                                              style: const TextStyle(
-                                                  fontSize: 20,
-                                                  color: kblackColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ],
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Location : ${units[index].unitLocation}",
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                color: kblackColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            height: height * .01,
+                                          ),
+                                          Text(
+                                            "Rooms : ${units[index].unitRooms}   ",
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                color: kblackColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: width * .05,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Beds : ${units[index].unitBeds}  ",
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                color: kblackColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            height: height * .01,
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                "Price : ",
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: kblackColor,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Text(
+                                                "${units[index].unitPrice}",
+                                                style: const TextStyle(
+                                                    fontSize: 20,
+                                                    color: kblackColor,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
