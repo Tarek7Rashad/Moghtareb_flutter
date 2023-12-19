@@ -24,104 +24,107 @@ class _UnitInfoState extends State<UnitInfo> {
     return BlocConsumer<MoghtarebCubit, MoghtarebState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return Scaffold(
-          body: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(
-                children: [
-                  Image.asset(unitModel.unitImages),
-                  SizedBox(height: height * 0.1),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Location : ',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        unitModel.unitLocation,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: height * 0.01),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Description : ',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        unitModel.unitDescription,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: height * 0.01),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Price : ',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        unitModel.unitPrice,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: height * 0.01),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Rooms : ',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        unitModel.unitRooms,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: height * 0.01),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Beds : ',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        unitModel.unitBeds,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: height * 0.07,
-                  ),
-                  SizedBox(
-                      height: 120,
-                      child: CustomButtonWidget(
-                          onPressed: () {
-                            BlocProvider.of<MoghtarebCubit>(context)
-                                .addToFavorite(unitModel);
+        return SafeArea(
+          child: Scaffold(
+            body: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
+                  children: [
+                    Image.asset(unitModel.unitImages),
+                    SizedBox(height: height * 0.1),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Location : ',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          unitModel.unitLocation,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: height * 0.05),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Description : ',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          unitModel.unitDescription,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: height * 0.05),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Price : ',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          unitModel.unitPrice,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: height * 0.05),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Rooms : ',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          unitModel.unitRooms,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: height * 0.05),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Beds : ',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          unitModel.unitBeds,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: height * 0.07,
+                    ),
+                    SizedBox(
+                        height: 120,
+                        child: CustomButtonWidget(
+                            onPressed: () {
+                              BlocProvider.of<MoghtarebCubit>(context)
+                                  .addToFavorite(unitModel);
 
-                            showSnackBar(context, 'Added');
-                          },
-                          text: "Add To Favorate".toUpperCase()))
-                ],
+                              showSnackBar(context, 'Added');
+                            },
+                            text: "Add To Favorate".toUpperCase()))
+                  ],
+                ),
               ),
             ),
           ),

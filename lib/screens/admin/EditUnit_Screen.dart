@@ -195,16 +195,24 @@ class _EditUnitState extends State<EditUnit> {
                       try {
                         if (updateUnitFormKey.currentState!.validate()) {
                           updateUnitFormKey.currentState!.save();
+
                           Store().editUnit(
                               ({
-                                kUnitImages: unitImages,
-                                kUnitPrice: price,
-                                kUnitDescription: description,
-                                kUnitLocation: unitLocation,
-                                kUnitRooms: rooms,
-                                kUnitBeds: beds,
+                                kUnitImages: unitImages =
+                                    updateUnitImagesEditingController.text,
+                                kUnitPrice: price =
+                                    updateUnitPriceEditingController.text,
+                                kUnitDescription: description =
+                                    updateUnitDescriptionEditingController.text,
+                                kUnitLocation: unitLocation =
+                                    updateUnitLocationEditingController.text,
+                                kUnitRooms: rooms =
+                                    updateUnitRoomsEditingController.text,
+                                kUnitBeds: beds =
+                                    updateUnitBedsEditingController.text,
                               }),
                               docId as String);
+
                           setState(() {});
                         } else {
                           updateUnitAutovalidateMode = AutovalidateMode.always;
@@ -213,7 +221,8 @@ class _EditUnitState extends State<EditUnit> {
                       } on Exception catch (e) {
                         log("this error from addUnit Button $e");
                       }
-
+                      Navigator.pop(context);
+                      updateUnitFormKey.currentState!.reset();
                       updateUnitImagesEditingController.clear();
                       updateUnitBedsEditingController.clear();
                       updateUnitDescriptionEditingController.clear();
