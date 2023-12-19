@@ -16,3 +16,5 @@ final class SignUpState extends MoghtarebState {}
 final class SignInScreenState extends MoghtarebState {}
 
 final class ChangeHeartColor extends MoghtarebState {}
+
+final class AddToFavorite extends MoghtarebState {}

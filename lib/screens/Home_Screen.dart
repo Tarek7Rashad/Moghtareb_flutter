@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moghtareb/Service/fireStoreService/StoreUnit.dart';
 import 'package:moghtareb/model/Unit_Model.dart';
+import 'package:moghtareb/screens/Favorite_Screen.dart';
 import 'package:moghtareb/screens/Profile_Screen.dart';
 import 'package:moghtareb/screens/Start_Screen.dart';
 import 'package:moghtareb/screens/UnitDetails.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Color color = Colors.black;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return BlocConsumer<MoghtarebCubit, MoghtarebState>(
@@ -90,6 +92,12 @@ class HomeScreen extends StatelessWidget {
                     backgroundColor: kblackColor,
                     child: Icon(Icons.person),
                   )),
+              IconButton(
+                  color: Colors.red,
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(FavoriteScreen.id);
+                  },
+                  icon: Icon(Icons.favorite))
             ],
             automaticallyImplyLeading: false,
             elevation: 0,
@@ -147,7 +155,10 @@ class HomeScreen extends StatelessWidget {
                           Navigator.of(context)
                               .pushNamed(UnitInfo.id, arguments: units[index]);
                         },
-                        child: Container(
+                        child:
+                            //  Stack(
+                            //   children: [
+                            Container(
                           width: double.infinity,
                           decoration: BoxDecoration(boxShadow: [
                             BoxShadow(
@@ -246,7 +257,7 @@ class HomeScreen extends StatelessWidget {
                                                         FontWeight.bold),
                                               ),
                                               Text(
-                                                "${units[index].unitPrice}",
+                                                units[index].unitPrice,
                                                 style: const TextStyle(
                                                     fontSize: 20,
                                                     color: kblackColor,
@@ -264,6 +275,27 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        // Positioned(
+                        //   right: 10,
+                        //   bottom: 10,
+                        //   child: IconButton(
+                        //       color: color,
+                        //       iconSize: 30,
+                        //       onPressed: () {
+                        //         BlocProvider.of<MoghtarebCubit>(context,
+                        //                 listen: false)
+                        //             .changeHeartColor(context, index);
+
+                        //         if (cubit.heartRedColor ) {
+                        //           color = Colors.red;
+                        //         } else {
+                        //           color = Colors.black;
+                        //         }
+                        //       },
+                        //       icon: const Icon(Icons.favorite)),
+                        // )
+                        // ],
+                        // ),
                       ),
                     );
                   },

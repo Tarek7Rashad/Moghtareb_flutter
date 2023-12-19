@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moghtareb/model/Unit_Model.dart';
+import 'package:moghtareb/shared/components/showSnackBar.dart';
+import 'package:moghtareb/shared/cubit/moghtareb_cubit.dart';
+import 'package:moghtareb/widget/CustomButton.dart';
 
 class UnitInfo extends StatefulWidget {
   const UnitInfo({super.key});
@@ -17,89 +21,112 @@ class _UnitInfoState extends State<UnitInfo> {
     late UnitModel unitModel =
         ModalRoute.of(context)!.settings.arguments as UnitModel;
 
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Column(
-            children: [
-              Image.asset('${unitModel.unitImages}'),
-              SizedBox(height: height * 0.1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocConsumer<MoghtarebCubit, MoghtarebState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          body: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
                 children: [
-                  Text(
-                    'Location : ',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  Image.asset(unitModel.unitImages),
+                  SizedBox(height: height * 0.1),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Location : ',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        unitModel.unitLocation,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
                   ),
-                  Text(
-                    '${unitModel.unitLocation}',
-                    style: TextStyle(fontSize: 18),
+                  SizedBox(height: height * 0.01),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Description : ',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        unitModel.unitDescription,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
+                  SizedBox(height: height * 0.01),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Price : ',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        unitModel.unitPrice,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: height * 0.01),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Rooms : ',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        unitModel.unitRooms,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: height * 0.01),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Beds : ',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        unitModel.unitBeds,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: height * 0.07,
+                  ),
+                  SizedBox(
+                      height: 120,
+                      child: CustomButtonWidget(
+                          onPressed: () {
+                            BlocProvider.of<MoghtarebCubit>(context)
+                                .addToFavorite(unitModel);
+
+                            showSnackBar(context, 'Added');
+                          },
+                          text: "Add To Favorate".toUpperCase()))
                 ],
               ),
-              SizedBox(height: height * 0.01),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Description : ',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    '${unitModel.unitDescription}',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-              SizedBox(height: height * 0.01),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Price : ',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    '${unitModel.unitPrice}',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ],
-              ),
-              SizedBox(height: height * 0.01),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Rooms : ',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    '${unitModel.unitRooms}',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ],
-              ),
-              SizedBox(height: height * 0.01),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Beds : ',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    '${unitModel.unitBeds}',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

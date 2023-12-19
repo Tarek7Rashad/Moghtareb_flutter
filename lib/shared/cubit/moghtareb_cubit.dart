@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:moghtareb/shared/constant.dart';
+import 'package:moghtareb/model/Unit_Model.dart';
 
 part 'moghtareb_state.dart';
 
@@ -20,16 +20,15 @@ class MoghtarebCubit extends Cubit<MoghtarebState> {
   late String registerEmail;
   late String registerPassword;
   late String registerConfirmPassword;
-  Color heartColor = kwhiteColor;
-  Color changeHeartColor() {
-    if (heartColor == kwhiteColor) {
-      heartColor = Colors.red;
-    } else {
-      heartColor = kwhiteColor;
-    }
-    emit(ChangeHeartColor());
-
-    return heartColor;
+  // bool heartRedColor = false;
+  // void changeHeartColor(BuildContext context,Index) {
+  //   heartRedColor = !heartRedColor;
+  //   emit(ChangeHeartColor());
+  // }
+  List<UnitModel> units2 = [];
+  addToFavorite(UnitModel unitModel) {
+    units2.add(unitModel);
+    emit(AddToFavorite());
   }
 
   String Id = 'lJ9lQBj3mwORRHgKmaYTrjMnOYi1';
