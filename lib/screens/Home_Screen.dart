@@ -5,12 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moghtareb/Service/fireStoreService/StoreUnit.dart';
 import 'package:moghtareb/model/Unit_Model.dart';
 import 'package:moghtareb/screens/Favorite_Screen.dart';
+import 'package:moghtareb/screens/Login_Screen.dart';
 import 'package:moghtareb/screens/Profile_Screen.dart';
-import 'package:moghtareb/screens/Start_Screen.dart';
 import 'package:moghtareb/screens/UnitDetails.dart';
 import 'package:moghtareb/shared/constant.dart';
 import 'package:moghtareb/shared/cubit/moghtareb_cubit.dart';
 import 'package:moghtareb/widget/CustomSearchBar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -74,11 +75,14 @@ class HomeScreen extends StatelessWidget {
                           animType: AnimType.rightSlide,
                           desc: 'Are You Sure To Sign Out ?',
                           btnCancelOnPress: () {},
-                          btnOkOnPress: () {
+                          btnOkOnPress: () async {
+                            SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.clear();
                             cubit.signOut();
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                  builder: (context) => const StartScreen(),
+                                  builder: (context) => const LoginScreen(),
                                 ),
                                 (route) => false);
                           },

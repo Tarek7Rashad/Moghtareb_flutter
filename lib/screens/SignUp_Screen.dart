@@ -229,10 +229,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 try {
                                   if (formRegisterKey.currentState!
                                       .validate()) {
-                                    formRegisterKey.currentState!.save();
+                                    // formRegisterKey.currentState!.save();
+
                                     loading = true;
                                     setState(() {});
                                     await cubit.signUp();
+
                                     registerEmailEditingController.clear();
                                     registerFirstNameEditingController.clear();
                                     registerLastNameEditingController.clear();

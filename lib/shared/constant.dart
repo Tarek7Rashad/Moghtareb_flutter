@@ -14,6 +14,8 @@ const kUnitPrice = 'unitPrice';
 const kUnitDescription = 'unitDescription';
 const kUnitRooms = 'unitRooms';
 const kUnitBeds = 'unitBeds';
+const kRememberMe = 'rememberMe';
+const kAdminRememberMe = 'AdminRememberMe';
 
 TextEditingController updateProfileUserNameEditingController =
     TextEditingController();

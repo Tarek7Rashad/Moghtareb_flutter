@@ -14,6 +14,7 @@ import 'package:moghtareb/shared/constant.dart';
 import 'package:moghtareb/shared/cubit/moghtareb_cubit.dart';
 import 'package:moghtareb/widget/CustomButton.dart';
 import 'package:moghtareb/widget/CustomTextFormField.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'LoginScreen';
@@ -24,10 +25,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 bool obscureText2 = true;
-bool rememberMe = false;
+
 bool loading = false;
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool rememberMe = false;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -163,7 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   value: rememberMe,
                                   onChanged: (value) {
                                     setState(() {
-                                      rememberMe = value!;
+                                      if (value != null) {
+                                        rememberMe = value;
+                                      }
                                     });
                                   },
                                 ),
@@ -178,10 +182,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             CustomButtonWidget(
                                 text: "Sign in",
                                 onPressed: () async {
+                                  if (rememberMe == true) {
+                                    rememberMeFun();
+                                    setState(() {
+                                      log('from true login ${rememberMe.toString()}');
+                                    });
+                                  }
                                   try {
                                     if (formKey.currentState!.validate()) {
                                       loading = true;
                                       setState(() {});
+
                                       await cubit.signIn();
                                       Navigator.pushReplacementNamed(
                                           context, HomeScreen.id);
@@ -261,5 +272,11 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
+  }
+
+  void rememberMeFun() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool(kRememberMe, rememberMe);
+    log('rememberMeFun  ${sharedPreferences.getBool(kRememberMe).toString()}');
   }
 }

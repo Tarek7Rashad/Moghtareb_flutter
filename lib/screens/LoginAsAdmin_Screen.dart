@@ -14,6 +14,7 @@ import 'package:moghtareb/shared/constant.dart';
 import 'package:moghtareb/shared/cubit/moghtareb_cubit.dart';
 import 'package:moghtareb/widget/CustomButton.dart';
 import 'package:moghtareb/widget/CustomTextFormField.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginAsAdminScreen extends StatefulWidget {
   static const String id = 'LoginAsAdminScreen';
@@ -26,7 +27,7 @@ bool passwordObscureText3 = true;
 bool idObscureText3 = true;
 
 bool loading = false;
-bool rememberMe = false;
+bool adminRememberMe = false;
 
 class _LoginScreenState extends State<LoginAsAdminScreen> {
   @override
@@ -195,10 +196,12 @@ class _LoginScreenState extends State<LoginAsAdminScreen> {
                               children: [
                                 Checkbox(
                                   activeColor: kblueGreyColor,
-                                  value: rememberMe,
+                                  value: adminRememberMe,
                                   onChanged: (value) {
                                     setState(() {
-                                      rememberMe = value!;
+                                      if (value != null) {
+                                        adminRememberMe = value;
+                                      }
                                     });
                                   },
                                 ),
@@ -213,6 +216,12 @@ class _LoginScreenState extends State<LoginAsAdminScreen> {
                             CustomButtonWidget(
                                 text: "Sign in",
                                 onPressed: () async {
+                                  if (adminRememberMe == true) {
+                                    rememberMeFun();
+                                    setState(() {
+                                      log('from true login ${adminRememberMe.toString()}');
+                                    });
+                                  }
                                   try {
                                     if (adminFormKey.currentState!.validate()) {
                                       loading = true;
@@ -297,5 +306,11 @@ class _LoginScreenState extends State<LoginAsAdminScreen> {
         );
       },
     );
+  }
+
+  void rememberMeFun() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool(kAdminRememberMe, adminRememberMe);
+    log('rememberMeFun  ${sharedPreferences.getBool(kRememberMe).toString()}');
   }
 }
