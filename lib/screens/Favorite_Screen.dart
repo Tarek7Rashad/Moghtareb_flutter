@@ -20,15 +20,33 @@ class FavoriteScreen extends StatelessWidget {
         ),
         body: units2.isNotEmpty
             ? ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: units2.length,
                 itemBuilder: (context, index) {
                   if (units2.isNotEmpty) {
-                    return CustomStackCard(
-                      beds: units2[index].unitBeds,
-                      location: units2[index].unitLocation,
-                      price: units2[index].unitPrice,
-                      rooms: units2[index].unitRooms,
-                      image: units2[index].unitImages,
+                    return Dismissible(
+                      key: UniqueKey(),
+                      direction: DismissDirection.startToEnd,
+                      onDismissed: (direction) {
+                        BlocProvider.of<MoghtarebCubit>(context)
+                            .removeUnit(units2[index]);
+                            
+                      },
+                      background: Container(
+                        color: Colors.red,
+                        alignment: Alignment.centerLeft,
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: CustomStackCard(
+                        beds: units2[index].unitBeds,
+                        location: units2[index].unitLocation,
+                        price: units2[index].unitPrice,
+                        rooms: units2[index].unitRooms,
+                        image: units2[index].unitImages,
+                      ),
                     );
                   }
                   return null;

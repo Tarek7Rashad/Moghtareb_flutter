@@ -24,7 +24,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 bool obscureText2 = true;
-
+bool rememberMe = false;
 bool loading = false;
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -156,8 +156,24 @@ class _LoginScreenState extends State<LoginScreen> {
                               labelText: "Password",
                               controller: passwordEditingController,
                             ),
-                            SizedBox(
-                              height: height * .02,
+                            Row(
+                              children: [
+                                Checkbox(
+                                  activeColor: kblueGreyColor,
+                                  value: rememberMe,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      rememberMe = value!;
+                                    });
+                                  },
+                                ),
+                                const Text(
+                                  'Remember Me',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                )
+                              ],
                             ),
                             CustomButtonWidget(
                                 text: "Sign in",

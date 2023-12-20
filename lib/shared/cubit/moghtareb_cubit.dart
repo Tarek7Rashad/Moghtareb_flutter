@@ -31,6 +31,11 @@ class MoghtarebCubit extends Cubit<MoghtarebState> {
     emit(AddToFavorite());
   }
 
+  removeUnit(UnitModel unitModel) {
+    units2.remove(unitModel);
+    emit(DeleteFromFavorite());
+  }
+
   String Id = 'lJ9lQBj3mwORRHgKmaYTrjMnOYi1';
 
   Future<void> signIn() async {

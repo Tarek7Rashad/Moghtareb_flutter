@@ -26,6 +26,7 @@ bool passwordObscureText3 = true;
 bool idObscureText3 = true;
 
 bool loading = false;
+bool rememberMe = false;
 
 class _LoginScreenState extends State<LoginAsAdminScreen> {
   @override
@@ -189,6 +190,25 @@ class _LoginScreenState extends State<LoginAsAdminScreen> {
                               hintText: "Id",
                               labelText: "Id",
                               controller: adminIdEditingController,
+                            ),
+                            Row(
+                              children: [
+                                Checkbox(
+                                  activeColor: kblueGreyColor,
+                                  value: rememberMe,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      rememberMe = value!;
+                                    });
+                                  },
+                                ),
+                                const Text(
+                                  'Remember Me',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                )
+                              ],
                             ),
                             CustomButtonWidget(
                                 text: "Sign in",

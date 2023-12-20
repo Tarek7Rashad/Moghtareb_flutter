@@ -117,10 +117,23 @@ class _UnitInfoState extends State<UnitInfo> {
                         height: 120,
                         child: CustomButtonWidget(
                             onPressed: () {
-                              BlocProvider.of<MoghtarebCubit>(context)
-                                  .addToFavorite(unitModel);
+                              var units =
+                                  BlocProvider.of<MoghtarebCubit>(context);
 
-                              showSnackBar(context, 'Added');
+                              bool exist = false;
+                              var existUnit = units.units2;
+                              for (var existUnit in existUnit) {
+                                if (existUnit.unitDescription ==
+                                    unitModel.unitDescription) {
+                                  exist = true;
+                                }
+                              }
+                              if (exist) {
+                                showSnackBar(context, 'Added Before');
+                              } else {
+                                units.addToFavorite(unitModel);
+                                showSnackBar(context, 'Added');
+                              }
                             },
                             text: "Add To Favorate".toUpperCase()))
                   ],

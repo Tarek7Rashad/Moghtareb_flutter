@@ -5,6 +5,7 @@ import 'package:moghtareb/Service/fireStoreService/StoreUnit.dart';
 import 'package:moghtareb/model/Unit_Model.dart';
 import 'package:moghtareb/screens/admin/EditUnit_Screen.dart';
 import 'package:moghtareb/shared/constant.dart';
+import 'package:moghtareb/widget/Custom_showMenu.dart';
 
 class ControlUnit extends StatefulWidget {
   const ControlUnit({super.key});
@@ -270,25 +271,4 @@ class _ControlUnitState extends State<ControlUnit> {
   }
 }
 
-class MyPopupMenuItem<T> extends PopupMenuItem<T> {
-  final Function onPressed;
-  // ignore: annotate_overrides, overridden_fields
-  final Widget child;
-  const MyPopupMenuItem(
-      {super.key, required this.onPressed, required this.child})
-      : super(child: child);
 
-  @override
-  PopupMenuItemState<T, PopupMenuItem<T>> createState() {
-    return MyPopupMenuItemState();
-  }
-}
-
-class MyPopupMenuItemState<T, PopupMenuItem>
-    extends PopupMenuItemState<T, MyPopupMenuItem<T>> {
-  @override
-  void handleTap() {
-    widget.onPressed();
-    super.handleTap();
-  }
-}
